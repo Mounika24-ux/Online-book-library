@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Luminara Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <!-- ================= HEADER ================= -->
+  <header class="top-header">
+    <div class="header-left">
+      <div class="logo-badge">📚</div>
+      <div>
+        <div class="logo-title">BookSphere Library</div>
+        <div class="logo-subtitle">Beautifully themed shelves for every mind</div>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="search-wrapper">
+        <input id="searchInput" type="text" placeholder="Search by title or author..." />
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="view-toggle">
+        <button id="viewGridBtn" class="chip chip-active">▣ Grid</button>
+        <button id="viewShelfBtn" class="chip">📚 Shelf</button>
+      </div>
+      <button id="themeToggle" class="chip chip-ghost">🌙 Dark</button>
+
+      <button id="btnAdmin" class="btn-pill hidden">Admin</button>
+      <span id="userGreeting" class="user-greeting hidden"></span>
+      <button id="btnLogin" class="btn-pill primary">Login</button>
+      <button id="btnLogout" class="btn-pill hidden">Logout</button>
+    </div>
+  </header>
+
+  <!-- =============== MAIN APP =============== -->
+  <div id="appWrapper" class="app-shell hidden">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">CATEGORIES</h3>
+        <div id="categoryList" class="category-list"></div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">FILTERS</h3>
+        <label class="field-label">Availability</label>
+        <select id="availabilityFilter">
+          <option value="all">All</option>
+          <option value="available">Available only</option>
+          <option value="unavailable">Checked out</option>
+        </select>
+
+        <label class="field-label">Sort</label>
+        <select id="sortSelect">
+          <option value="title-asc">Title A–Z</option>
+          <option value="year-desc">Newest first</option>
+          <option value="year-asc">Oldest first</option>
+        </select>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="content">
+      <div class="content-header">
+        <div>
+          <h2 id="currentCategoryTitle">All Books</h2>
+          <p id="bookCount" class="muted"></p>
+        </div>
+        <span class="pill-soft">Full-stack demo • JWT login</span>
+      </div>
+
+      <div id="booksContainer" class="books-grid grid-view">
+        <!-- Cards injected here dynamically -->
+      </div>
+    </main>
+  </div>
+
+  <!-- =============== AUTH MODAL =============== -->
+  <div id="authModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button id="closeAuth" class="modal-close">✖</button>
+
+      <div class="modal-tabs">
+        <button id="tabLogin" class="modal-tab active">Login</button>
+        <button id="tabSignup" class="modal-tab">Sign up</button>
+      </div>
+
+      <!-- LOGIN -->
+      <form id="loginForm" class="modal-form">
+        <label>Email</label>
+        <input id="loginEmail" type="email" required />
+
+        <label>Password</label>
+        <input id="loginPassword" type="password" required />
+
+        <button class="btn-pill primary full-width" type="submit">Login</button>
+      </form>
+
+      <!-- SIGNUP -->
+      <form id="signupForm" class="modal-form hidden">
+        <label>Full Name</label>
+        <input id="signupName" type="text" required />
+
+        <label>Email</label>
+        <input id="signupEmail" type="email" required />
+
+        <label>Password</label>
+        <input id="signupPassword" type="password" required />
+
+        <label>Cover Image URL</label>
+        <input id="adminBookCover" placeholder="https://example.com/book.jpg" />
+
+        <button class="btn-pill primary full-width" type="submit">
+          Create Account
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =============== ADMIN PANEL =============== -->
+  <section id="adminPanel" class="admin-panel hidden">
+    <div class="admin-header">
+      <button id="adminBackBtn" class="btn-pill">⬅ Back to Library</button>
+      <h2>📘 Admin Panel – Manage Books</h2>
+    </div>
+
+    <div class="admin-body">
+      <!-- Add book -->
+      <div class="admin-card">
+        <h3>Add New Book</h3>
+        <form id="adminAddBookForm" class="admin-form">
+          <label>Title</label>
+          <input id="adminBookTitle" required />
+
+          <label>Author</label>
+          <input id="adminBookAuthor" required />
+
+          <label>Category</label>
+          <input id="adminBookCategory" required />
+
+          <label>Description</label>
+          <textarea id="adminBookDescription" rows="3"></textarea>
+
+          <label>Total Copies</label>
+          <input id="adminBookTotal" type="number" min="1" required />
+
+          <button class="btn-pill primary full-width" type="submit">
+            Add Book
+          </button>
+        </form>
+      </div>
+
+      <!-- Book list -->
+      <div class="admin-card">
+        <h3>All Books</h3>
+        <div id="adminBooksList" class="admin-books-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN SCRIPT -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
